@@ -19,5 +19,6 @@ mongoose.connect('mongodb://localhost/vidly')
   .catch( err => { console.log('could not connect to the database ', err )});
 
 
+
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log(`listeining on port ${port} ...`))
