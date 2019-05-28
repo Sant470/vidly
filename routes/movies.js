@@ -1,3 +1,4 @@
+const auth = require('../middleware/auth');
 const { Genre } = require('../models/genre');
 const { Movie, validate } = require('../models/movie');
 const mongoose = require('mongoose');
@@ -12,7 +13,7 @@ router.get('/', async(req, res) => {
 });
 
 // create api, create a movie
-router.post('/', async(req, res) => {
+router.post('/', auth, async(req, res) => {
   const { error } = validate(req.body);
   if(error) return res.status(400).send(error.details[0].message);
   const genre = await Genre.findById(req.body.genreId);
@@ -38,7 +39,7 @@ router.get('/:id', async(req, res) => {
 });
 
 // update api, update a movie
-router.put('/:id', async(req, res) => {
+router.put('/:id', auth, async(req, res) => {
   const { error } = validate(req.body);
   if(error) return res.status(400).send(error.details[0].message);
   const genre = await Genre.findById(req.body.genreId);
